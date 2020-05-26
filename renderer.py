@@ -38,11 +38,18 @@ def draw_text(pl: list, ax):
 class Renderer:
 	def __init__(self, ro: RenderObject, file_path: str, config: dict, output_dir: str):
 		self.render_object = ro
-		self.output_dir = output_dir
 
 		exists = os.path.exists(output_dir)
 		if not exists:
 			os.makedirs(output_dir)
+
+		(_, f_t) = os.path.split(file_path)
+		(file_prefix, _) = os.path.splitext(f_t)
+		s_dir = os.path.join(output_dir, file_prefix)
+		exists = os.path.exists(s_dir)
+		if not exists:
+			os.makedirs(s_dir)
+		self.s_dir = s_dir
 
 		ro.parse_from_file(file_path)
 		ro.gen_command_list(config)
@@ -97,7 +104,7 @@ class Renderer:
 			self.ax.yaxis.set_major_locator(plt.NullLocator())
 			plt.subplots_adjust(top=1, bottom=0, left=0, right=1, hspace=0, wspace=0)
 			plt.margins(0, 0)
-			self.fig.savefig(self.output_dir + str(i) + "." + fmt, dpi=600, format=fmt)
+			self.fig.savefig(os.path.join(self.s_dir, str(i) + "." + fmt), dpi=600, format=fmt)
 			plt.close(self.fig)
 
 
@@ -109,6 +116,6 @@ conf["margin_h"] = 2 * radius
 conf["margin_v"] = 2 * radius
 
 # output_dir must end with // or \
-renderer = Renderer(robt, r".//case.txt", conf, r".//Test//")
+renderer = Renderer(robt, r".//case1.txt", conf, r".//Data//")
 renderer.sort_command_list()
 renderer.draw("png")
