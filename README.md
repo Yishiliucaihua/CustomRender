@@ -17,4 +17,4 @@ Implementation details and expansion method can be found in codes.
 
 case.txt provides few bracket form trees.
 
-images after processing were stored in ./Test.
+images after processing were stored in ./Data.
