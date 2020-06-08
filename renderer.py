@@ -23,7 +23,7 @@ def draw_line(pl: list, ax):
 def draw_circle(pl: list, ax):
 	if len(pl) != 3:
 		print("error: the parameters of draw circle wasn't correct")
-	c = Circle((float(pl[0]), float(pl[1])), float(pl[2]), facecolor="orange", linewidth=3, alpha=0.7)
+	c = Circle((float(pl[0]), float(pl[1])), float(pl[2]), facecolor="white", linewidth=3, alpha=0.7, edgecolor="black")
 	ax.add_patch(c)
 
 
@@ -103,7 +103,8 @@ class Renderer:
 			self.ax.xaxis.set_major_locator(plt.NullLocator())
 			self.ax.yaxis.set_major_locator(plt.NullLocator())
 			plt.subplots_adjust(top=1, bottom=0, left=0, right=1, hspace=0, wspace=0)
-			plt.margins(0, 0)
+			# to avoid losing primitives in corner
+			plt.margins(0.01, 0.01)
 			self.fig.savefig(os.path.join(self.s_dir, str(i) + "." + fmt), dpi=600, format=fmt)
 			plt.close(self.fig)
 
@@ -116,6 +117,6 @@ conf["margin_h"] = 2 * radius
 conf["margin_v"] = 2 * radius
 
 # output_dir must end with // or \
-renderer = Renderer(robt, r".//case1.txt", conf, r".//Data//")
+renderer = Renderer(robt, r".//case2.txt", conf, r".//Data//")
 renderer.sort_command_list()
 renderer.draw("png")

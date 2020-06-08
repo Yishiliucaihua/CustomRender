@@ -26,6 +26,16 @@ def get_text_size(r):
 	return r * 6
 
 
+def modify_label(root, d: dict):
+	for child in root.children:
+		modify_label(child, d)
+	if d.get(root.label) is None:
+		d[root.label] = 0
+	lab = root.label
+	root.label = r"$\mathrm{" + lab + r"}_" + str(d[lab]) + r"$"
+	d[lab] = d[lab] + 1
+
+
 class RenderObjectBracketTree(RenderObject):
 	l_b = "{"
 	r_b = "}"
@@ -87,6 +97,9 @@ class RenderObjectBracketTree(RenderObject):
 				if len(stack) != 1:
 					print("error: parse " + file_path + ", line" + str(i + 1) + " -> can't match full content")
 					return False
+
+				d = {}
+				modify_label(node, d)
 				self.roots.append(node)
 
 	def gen_command(self, root: BracketTreeNode, cur_v, cur_h, r, margin_v, margin_h, commands):
