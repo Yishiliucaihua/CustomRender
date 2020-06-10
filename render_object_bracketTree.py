@@ -116,6 +116,7 @@ class RenderObjectBracketTree(RenderObject):
 			root.set({"h": ((s_h + e_h) / 2)})
 
 		self.v = max(self.v, root.get("v"))
+		self.h = max(self.h, root.get("h"))
 
 		for child in root.children:
 			# Avoid line intersect with circle
@@ -172,5 +173,5 @@ class RenderObjectBracketTree(RenderObject):
 			self.h = -1
 			self.v = -1
 			self.gen_command(root, r, r, r, margin_v, margin_h, commands)
-			self.info.append((self.v + r, root.get("h") * 2))
+			self.info.append((self.v + r, self.h + r))
 			self.command_list.append(commands)
