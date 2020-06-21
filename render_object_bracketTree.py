@@ -168,10 +168,16 @@ class RenderObjectBracketTree(RenderObject):
 		margin_v = config["margin_v"]
 		self.command_list.clear()
 
+		i = 1
 		for root in self.roots:
 			commands = []
 			self.h = -1
 			self.v = -1
 			self.gen_command(root, r, r, r, margin_v, margin_h, commands)
+			# draw tree id(optional)
+			text = "text: " + str(root.get("h") - 2.5 * r) + "," + str(root.get("v")) + ","
+			text = text + r"$T" + r"_" + str(i) + "$," + str(r * 7)
+			commands.append(text)
+			i = i + 1
 			self.info.append((self.v + r, self.h + r))
 			self.command_list.append(commands)
