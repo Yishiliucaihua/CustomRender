@@ -4,7 +4,7 @@
 
 Used to generate images or vector graphics from custom definition data structures.
 
-Current version implements bracket form tree structure only.
+Current version implements bracket form tree structure and bipartite graph only.
 
 Implementation details and expansion method can be found in codes.
 
@@ -15,6 +15,8 @@ Implementation details and expansion method can be found in codes.
 
  ## Experiment
 
-case.txt provides few bracket form trees.
+bt_x.txt provides few bracket form trees.
 
-images after processing were stored in ./Data.
+bg_x.txt provides few bipartite graphs
+
+images after processing were stored in ./BTData and ./BGData, respectively.

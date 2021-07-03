@@ -69,7 +69,7 @@ class Renderer:
 			cs = len(commands)
 
 			for i in range(cs):
-				for j in range(cs):
+				for j in range(i + 1, cs):
 					ki = str(commands[i]).split(":")[0]
 					kj = str(commands[j]).split(":")[0]
 					if Renderer.function_map[ki] < Renderer.function_map[kj]:
@@ -162,17 +162,3 @@ class Renderer:
 		plt.margins(0.01, 0.01)
 		self.fig.savefig(os.path.join(self.s_dir, str(n) + "." + fmt), dpi=600, format=fmt)
 		plt.close(self.fig)
-
-
-robt = RenderObjectBracketTree()
-conf = {}
-radius = 10
-conf["r"] = radius
-conf["margin_h"] = 2 * radius
-conf["margin_v"] = 2 * radius
-
-# output_dir must end with // or \
-renderer = Renderer(robt, r".//case3.txt", conf, r".//Data//")
-renderer.sort_command_list()
-# renderer.draw("png")
-renderer.draw_to_one_file("png", 2 * radius)
