@@ -53,7 +53,7 @@ class RenderObjectBipartiteGraph(RenderObject):
 			for _e in te:
 				_e = _e.replace("(", "").replace(")", "")
 				_e = _e.split(",")
-				self.es.append([_e[0].strip(), _e[1].strip()])
+				self.es.append([_e[0].strip(), _e[1].strip(), _e[2].strip()])
 
 	def gen_command(self, vsh, ush, r, gap_h, gap_v, commands):
 		# U
@@ -85,7 +85,7 @@ class RenderObjectBipartiteGraph(RenderObject):
 			l_h = self.lm[e[1]]["cp_h"]
 			l_v = self.lm[e[1]]["cp_v"]
 			command = "line: " + str(u_h) + "," + str(u_v) + ","
-			command = command + str(l_h) + "," + str(l_v)
+			command = command + str(l_h) + "," + str(l_v) + "," + str(e[2])
 			commands.append(command)
 
 		self.v = gap_v + 2 * r

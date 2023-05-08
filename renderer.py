@@ -13,12 +13,16 @@ draw_offset_info_size = 1
 # and you should change parameters of all draw_xxx like method when needed,
 # they must have same form
 def draw_line(pl: list, ax):
-	if len(pl) != 4 + draw_offset_info_size:
+	if len(pl) != 5 + draw_offset_info_size:
 		print("error: the parameters of draw line wasn't correct")
-	vertices = [(float(pl[0]) + float(pl[4]), float(pl[1])), (float(pl[2]) + float(pl[4]), float(pl[3]))]
+	vertices = [(float(pl[0]) + float(pl[5]), float(pl[1])), (float(pl[2]) + float(pl[5]), float(pl[3]))]
 	codes = [Path.MOVETO, Path.LINETO]
 	path = Path(vertices, codes)
-	patch = PathPatch(path, lw=2)
+	if int(pl[4]) == 0:
+		ls = 'dashed'
+	else:
+		ls = 'solid'
+	patch = PathPatch(path, lw=2, linestyle=ls)
 	ax.add_patch(patch)
 
 
